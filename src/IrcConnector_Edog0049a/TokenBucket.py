@@ -17,7 +17,7 @@ class TokenBucket:
         :return: _description_
         :rtype: bool
         """
-        self._fill_Bucket()            
+        self._fillBucket()            
         if not self.isEmpty:
             self._bucket -= 1
             return True
@@ -40,14 +40,14 @@ class TokenBucket:
         self._timePeriod = seconds
 
     @property
-    def _isfull(self) -> bool:
+    def isFull(self) -> bool:
         return self._bucket == self.maxToken
     
     @property
     def isEmpty(self) -> bool:
         return self._bucket == 0
     
-    def _fill_Bucket(self) -> None:
+    def _fillBucket(self) -> None:
         if datetime.now() > self._nextFill:
             self._nextFill = datetime.now() + timedelta(seconds=self._timePeriod)
             self._bucket = self.maxToken

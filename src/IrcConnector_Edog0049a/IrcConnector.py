@@ -1,4 +1,4 @@
-from typing import  Callable, 
+from typing import  Callable
 import asyncio
 import socket
 import select
@@ -99,7 +99,7 @@ class IrcConnector():
             await self._errorCheck()
 
 
-    async def _send(self, data: str=None)->None:
+    async def _send(self, data: str)->None:
         """ IrcController.send - sends to server 
             
             :param data: string to be sent to IRC server
@@ -177,6 +177,7 @@ class IrcConnector():
             self._event.emit(self, self.EVENTS.ERROR, error)
             self.disconnect()
       
+      
     def _getNewSocket(self) -> socket.socket:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             if self._SSL:
@@ -198,6 +199,4 @@ class IrcConnector():
         except RuntimeError:
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
-        return loop   
-
-    
+        return loop       
